@@ -42,6 +42,12 @@ class _HomePageState extends State<HomePage> {
       body: Padding(
         padding: EdgeInsets.all(18.0),
         child: PageView.builder(
+          controller: _controller!,
+          onPageChanged: (page) {
+            setState(() {
+              isPressed = false;
+            });
+          },
           itemCount: questions.length,
           itemBuilder: (context, index) {
             return Column(
@@ -92,7 +98,7 @@ class _HomePageState extends State<HomePage> {
                           : secondColor,
                       padding: EdgeInsets.symmetric(vertical: 18.0),
                       onPressed: isPressed
-                          ? null
+                          ? () {}
                           : () {
                               setState(() {
                                 isPressed = true;
@@ -118,7 +124,13 @@ class _HomePageState extends State<HomePage> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     OutlinedButton(
-                      onPressed: () {},
+                      onPressed: isPressed
+                          ? () {
+                              _controller!.nextPage(
+                                  duration: Duration(microseconds: 750),
+                                  curve: Curves.bounceIn);
+                            }
+                          : null,
                       style: ButtonStyle(),
                       child: Text(
                         "Next Question",
