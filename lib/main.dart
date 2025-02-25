@@ -30,9 +30,10 @@ class _HomePageState extends State<HomePage> {
 
   PageController? _controller = PageController(initialPage: 0);
   bool isPressed = false;
-  Color isTrue = Colors.greenAccent;
+  Color isTrue = Colors.green;
   Color isWrong = Colors.redAccent;
   Color btnColor = Color(0xff117eeb);
+  int score = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -84,23 +85,26 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: MaterialButton(
                       shape: StadiumBorder(),
-                      color: btnColor,
+                      color: isPressed
+                          ? questions[index].answers!.entries.toList()[i].value
+                              ? isTrue
+                              : isWrong
+                          : secondColor,
                       padding: EdgeInsets.symmetric(vertical: 18.0),
-                      onPressed: () {
-                        if (questions[index]
-                            .answers!
-                            .entries
-                            .toList()[i]
-                            .value) {
-                          setState(() {
-                            btnColor = isTrue;
-                          });
-                        } else {
-                          setState(() {
-                            btnColor = isWrong;
-                          });
-                        }
-                      },
+                      onPressed: isPressed
+                          ? null
+                          : () {
+                              setState(() {
+                                isPressed = true;
+                              });
+                              if (questions[index]
+                                  .answers!
+                                  .entries
+                                  .toList()[i]
+                                  .value) {
+                                score += 10;
+                              }
+                            },
                       child: Text(
                         questions[index].answers!.keys.toList()[i],
                         style: TextStyle(color: Colors.white),
