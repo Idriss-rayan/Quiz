@@ -18,11 +18,11 @@ List<QuestionModel> questions = [
     "When it feels content": false,
     "All of the above": true,
   }),
-  QuestionModel("What is the averge nulber of kittens in a litter ?", {
-    "1 to 2": false,
-    "3 to 5": true,
-    "8 to 10": false,
-    "12 to 14": false,
+  QuestionModel("Qui est le president des Etats unis d' Amerique ?", {
+    "Donald Trump": true,
+    "Kamala Harris": false,
+    "Barack hussein": false,
+    "Macron": false,
   }),
   QuestionModel("How many moons does Mars have ?", {
     "1": false,
